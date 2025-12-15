@@ -20,4 +20,9 @@ export const donationService = {
         const response = await api.get('/api/donations/stats');
         return response.data;
     },
+
+    getDonationById: async (id) => {
+        const response = await api.get(`/api/donations/${id}`);
+        return response.data;
+    },
 };

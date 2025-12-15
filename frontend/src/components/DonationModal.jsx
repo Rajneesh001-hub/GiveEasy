@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X, ArrowLeft, CheckCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react'; // Using QRCodeCanvas for better rendering
 import { donationService } from '../services/donationService';
 
 const DonationModal = ({ campaign, isOpen, onClose, onSuccess }) => {
+    const navigate = useNavigate();
     const [amount, setAmount] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -35,7 +37,7 @@ const DonationModal = ({ campaign, isOpen, onClose, onSuccess }) => {
         setLoading(true);
 
         try {
-            await donationService.createDonation({
+            const data = await donationService.createDonation({
                 campaign: campaign._id,
                 amount: Number(amount),
                 message,
@@ -43,6 +45,7 @@ const DonationModal = ({ campaign, isOpen, onClose, onSuccess }) => {
             });
             onSuccess?.();
             onClose();
+            navigate(`/donation/success/${data._id}`);
             // Reset form
             setAmount('');
             setMessage('');

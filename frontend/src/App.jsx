@@ -12,6 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import DonationSuccess from './pages/DonationSuccess';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
                 </ProtectedRoute>
               } />
               <Route path="/campaigns/:id" element={<CampaignDetails />} />
+              <Route path="/donation/success/:id" element={
+                <ProtectedRoute>
+                  <DonationSuccess />
+                </ProtectedRoute>
+              } />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route

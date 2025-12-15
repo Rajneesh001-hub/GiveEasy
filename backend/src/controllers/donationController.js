@@ -89,3 +89,27 @@ exports.getDonationStats = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// @desc    Get single donation by ID
+// @route   GET /api/donations/:id
+// @access  Private
+exports.getDonationById = async (req, res) => {
+    try {
+        const donation = await Donation.findById(req.params.id)
+            .populate('campaign', 'title ngo')
+            .populate('user', 'name email');
+
+        if (!donation) {
+            return res.status(404).json({ message: 'Donation not found' });
+        }
+
+        // Ensure user owns the donation or is admin
+        if (donation.user._id.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        res.json(donation);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
