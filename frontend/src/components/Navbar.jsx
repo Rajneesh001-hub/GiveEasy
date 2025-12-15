@@ -36,13 +36,13 @@ const Navbar = () => {
                             to="/campaigns"
                             className="text-gray-700 hover:text-gray-900 transition-colors"
                         >
-                            Campaigns
+                            Explore Causes
                         </Link>
                         <Link
                             to="/campaigns/create"
                             className="text-gray-700 hover:text-gray-900 transition-colors"
                         >
-                            Start a Campaign
+                            Start Fundraising
                         </Link>
                         {isAuthenticated && (
                             <Link
@@ -89,7 +89,7 @@ const Navbar = () => {
                                     Login
                                 </Link>
                                 <Link to="/register" className="btn-primary">
-                                    Sign Up
+                                    Start Fundraising
                                 </Link>
                             </div>
                         )}

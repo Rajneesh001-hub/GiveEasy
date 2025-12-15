@@ -24,68 +24,72 @@ const Home = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white text-gray-900 font-sans">
-            {/* Minimal Hero */}
-            <section className="pt-32 pb-20 px-4">
-                <div className="max-w-4xl mx-auto text-center">
-                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium mb-6">
-                        <span className="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
-                        Trusted by 10,000+ donors
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
-                        Giving made <span className="text-green-600">simple</span> <br className="hidden md:block" /> and impactful.
-                    </h1>
-                    <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-                        Connect with verified causes and track your donations in real-time.
-                        The easiest way to make a difference today.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <Link to="/campaigns" className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all flex items-center gap-2 text-lg shadow-lg shadow-green-200">
-                            Explore Causes <ArrowRight size={20} />
-                        </Link>
-                        <Link to="/register" className="text-gray-600 font-medium px-8 py-4 hover:text-green-600 transition-colors">
-                            Get Started
-                        </Link>
+        <div className="min-h-screen bg-gray-50 font-sans">
+            {/* Hero Section */}
+            <div className="relative w-full h-[600px] flex items-center">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+                        alt="Volunteers planting"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40"></div>
+                </div>
+
+                <div className="relative z-10 container mx-auto px-4">
+                    <div className="max-w-3xl">
+                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                            Empower Change.<br />
+                            Fund the Future.
+                        </h1>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Link
+                                to="/campaigns"
+                                className="bg-green-500 hover:bg-green-600 text-white px-8 py-3.5 rounded-lg font-bold text-lg transition-colors inline-block text-center"
+                            >
+                                Donate Now
+                            </Link>
+                            <Link
+                                to="/create-campaign"
+                                className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3.5 rounded-lg font-bold text-lg transition-colors inline-block text-center"
+                            >
+                                Start a Campaign
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            {/* Simple Stats/Trust */}
-            <section className="py-12 border-y border-gray-100 bg-gray-50/50">
+            {/* Stats Bar */}
+            <div className="bg-white border-b border-gray-100 shadow-sm relative z-20">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
-                        <div className="p-4">
-                            <div className="text-4xl font-bold text-gray-900 mb-2">100%</div>
-                            <div className="text-gray-500 font-medium">Verified NGOs</div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                        <div className="py-8 text-center px-4">
+                            <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">50M+</div>
+                            <div className="text-gray-500 font-medium">Raised</div>
                         </div>
-                        <div className="p-4">
-                            <div className="text-4xl font-bold text-gray-900 mb-2">₹50L+</div>
-                            <div className="text-gray-500 font-medium">Funds Raised</div>
+                        <div className="py-8 text-center px-4">
+                            <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">10,000+</div>
+                            <div className="text-gray-500 font-medium">Campaigns</div>
                         </div>
-                        <div className="p-4">
-                            <div className="text-4xl font-bold text-gray-900 mb-2">Zero</div>
-                            <div className="text-gray-500 font-medium">Platform Fees</div>
+                        <div className="py-8 text-center px-4">
+                            <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">2M+</div>
+                            <div className="text-gray-500 font-medium">Donors</div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            {/* Featured Section */}
-            <section className="py-24">
-                <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="flex justify-between items-end mb-12">
-                        <div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-2">Trending Campaigns</h2>
-                            <p className="text-gray-500">Urgent causes needing your help right now.</p>
-                        </div>
-                        <Link to="/campaigns" className="hidden md:flex items-center text-green-600 font-semibold hover:text-green-700 transition-colors">
-                            View all <ArrowRight size={16} className="ml-2" />
-                        </Link>
+            {/* Urgent Causes Section */}
+            <section className="py-20">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-bold text-gray-900">Urgent Causes Needing Your Help</h2>
                     </div>
 
                     {loading ? (
                         <div className="flex justify-center py-20">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500"></div>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -94,42 +98,14 @@ const Home = () => {
                             ))}
                         </div>
                     )}
-                    <div className="mt-12 text-center md:hidden">
-                        <Link to="/campaigns" className="btn-secondary">View all campaigns</Link>
-                    </div>
-                </div>
-            </section>
 
-            {/* Simple Value Props */}
-            <section className="py-24 bg-gray-900 text-white rounded-t-3xl mx-4 lg:mx-8 mb-8">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold mb-4">Why GiveEasy?</h2>
-                        <p className="text-gray-400">Transparency and trust at the core of every donation.</p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-12 text-center">
-                        <div className="flex flex-col items-center">
-                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
-                                <ShieldCheck size={32} className="text-green-400" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3">100% Verified</h3>
-                            <p className="text-gray-400">Every NGO is manually vetted to ensure your money goes to the right place.</p>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
-                                <Globe size={32} className="text-green-400" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3">Global Impact</h3>
-                            <p className="text-gray-400">Support causes from across the nation, from local shelters to national relief funds.</p>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
-                                <Heart size={32} className="text-green-400" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3">Transparent</h3>
-                            <p className="text-gray-400">Get regular updates and see exactly how your donation is making a difference.</p>
-                        </div>
+                    <div className="mt-16 text-center">
+                        <Link
+                            to="/campaigns"
+                            className="text-green-600 font-semibold hover:text-green-700 text-lg hover:underline"
+                        >
+                            View all causes
+                        </Link>
                     </div>
                 </div>
             </section>
