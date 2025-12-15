@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
 
 const CreateCampaign = () => {
-    const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
     const navigate = useNavigate();
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
@@ -41,29 +41,15 @@ const CreateCampaign = () => {
         setLoading(true);
 
         try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`${baseURL}/api/campaigns`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    ...formData,
-                    goalAmount: Number(formData.goalAmount),
-                }),
+            const response = await api.post('/api/campaigns', {
+                ...formData,
+                goalAmount: Number(formData.goalAmount),
             });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Failed to create campaign');
-            }
 
             // Redirect to campaigns page or the new campaign details
             navigate('/campaigns');
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || err.message || 'Failed to create campaign');
         } finally {
             setLoading(false);
         }
