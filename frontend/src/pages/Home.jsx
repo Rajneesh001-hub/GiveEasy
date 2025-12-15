@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { campaignService } from '../services/campaignService';
 import CampaignCard from '../components/CampaignCard';
-import { TrendingUp, Users, Target, Heart } from 'lucide-react';
+import { ArrowRight, Heart, Globe, ShieldCheck } from 'lucide-react';
 
 const Home = () => {
     const [campaigns, setCampaigns] = useState([]);
@@ -15,7 +15,7 @@ const Home = () => {
     const fetchCampaigns = async () => {
         try {
             const data = await campaignService.getAllCampaigns({ verified: true, status: 'active' });
-            setCampaigns(data.slice(0, 6)); // Show only 6 featured campaigns
+            setCampaigns(data.slice(0, 3)); // Show top 3
         } catch (error) {
             console.error('Error fetching campaigns:', error);
         } finally {
@@ -24,98 +24,112 @@ const Home = () => {
     };
 
     return (
-        <div className="min-h-screen">
-            {/* Hero Section */}
-            <section className="bg-gradient-to-br from-primary/20 via-white to-primary/10 py-20">
-                <div className="container">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                            Make a Difference,{' '}
-                            <span className="text-primary-800">One Donation at a Time</span>
-                        </h1>
-                        <p className="text-xl text-gray-600 mb-8">
-                            Support verified NGOs and social causes. Track your impact. Create lasting change.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link to="/campaigns" className="btn-primary text-lg px-8 py-3">
-                                Browse Campaigns
-                            </Link>
-                            <Link to="/register" className="btn-secondary text-lg px-8 py-3">
-                                Get Started
-                            </Link>
+        <div className="min-h-screen bg-white text-gray-900 font-sans">
+            {/* Minimal Hero */}
+            <section className="pt-32 pb-20 px-4">
+                <div className="max-w-4xl mx-auto text-center">
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium mb-6">
+                        <span className="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+                        Trusted by 10,000+ donors
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
+                        Giving made <span className="text-green-600">simple</span> <br className="hidden md:block" /> and impactful.
+                    </h1>
+                    <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+                        Connect with verified causes and track your donations in real-time.
+                        The easiest way to make a difference today.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <Link to="/campaigns" className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-all flex items-center gap-2 text-lg shadow-lg shadow-green-200">
+                            Explore Causes <ArrowRight size={20} />
+                        </Link>
+                        <Link to="/register" className="text-gray-600 font-medium px-8 py-4 hover:text-green-600 transition-colors">
+                            Get Started
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Simple Stats/Trust */}
+            <section className="py-12 border-y border-gray-100 bg-gray-50/50">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                        <div className="p-4">
+                            <div className="text-4xl font-bold text-gray-900 mb-2">100%</div>
+                            <div className="text-gray-500 font-medium">Verified NGOs</div>
+                        </div>
+                        <div className="p-4">
+                            <div className="text-4xl font-bold text-gray-900 mb-2">₹50L+</div>
+                            <div className="text-gray-500 font-medium">Funds Raised</div>
+                        </div>
+                        <div className="p-4">
+                            <div className="text-4xl font-bold text-gray-900 mb-2">Zero</div>
+                            <div className="text-gray-500 font-medium">Platform Fees</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Stats Section */}
-            <section className="py-16 bg-white">
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        {[
-                            { icon: Heart, label: 'Active Campaigns', value: '150+' },
-                            { icon: Users, label: 'Total Donors', value: '10,000+' },
-                            { icon: Target, label: 'Funds Raised', value: '₹50L+' },
-                            { icon: TrendingUp, label: 'Success Rate', value: '95%' },
-                        ].map((stat, index) => (
-                            <div
-                                key={index}
-                                className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
-                            >
-                                <stat.icon className="w-10 h-10 mx-auto mb-3 text-primary-800" />
-                                <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                                <p className="text-gray-600">{stat.label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured Campaigns */}
-            <section className="py-16 bg-gray-50">
-                <div className="container">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Campaigns</h2>
-                        <p className="text-lg text-gray-600">
-                            Support these verified causes and make an impact today
-                        </p>
+            {/* Featured Section */}
+            <section className="py-24">
+                <div className="container mx-auto px-4 max-w-6xl">
+                    <div className="flex justify-between items-end mb-12">
+                        <div>
+                            <h2 className="text-3xl font-bold text-gray-900 mb-2">Trending Campaigns</h2>
+                            <p className="text-gray-500">Urgent causes needing your help right now.</p>
+                        </div>
+                        <Link to="/campaigns" className="hidden md:flex items-center text-green-600 font-semibold hover:text-green-700 transition-colors">
+                            View all <ArrowRight size={16} className="ml-2" />
+                        </Link>
                     </div>
 
                     {loading ? (
-                        <div className="text-center py-12">
-                            <div className="inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                        <div className="flex justify-center py-20">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
                         </div>
                     ) : (
-                        <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                                {campaigns.map((campaign) => (
-                                    <CampaignCard key={campaign._id} campaign={campaign} />
-                                ))}
-                            </div>
-
-                            <div className="text-center">
-                                <Link to="/campaigns" className="btn-primary text-lg px-8 py-3">
-                                    View All Campaigns
-                                </Link>
-                            </div>
-                        </>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {campaigns.map((campaign) => (
+                                <CampaignCard key={campaign._id} campaign={campaign} />
+                            ))}
+                        </div>
                     )}
+                    <div className="mt-12 text-center md:hidden">
+                        <Link to="/campaigns" className="btn-secondary">View all campaigns</Link>
+                    </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-16 bg-gradient-to-r from-primary/20 to-primary/10">
-                <div className="container">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            Ready to Make a Difference?
-                        </h2>
-                        <p className="text-lg text-gray-600 mb-8">
-                            Join thousands of donors supporting verified causes and creating lasting impact
-                        </p>
-                        <Link to="/register" className="btn-primary text-lg px-8 py-3 inline-block">
-                            Join GiveEasy Today
-                        </Link>
+            {/* Simple Value Props */}
+            <section className="py-24 bg-gray-900 text-white rounded-t-3xl mx-4 lg:mx-8 mb-8">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold mb-4">Why GiveEasy?</h2>
+                        <p className="text-gray-400">Transparency and trust at the core of every donation.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-12 text-center">
+                        <div className="flex flex-col items-center">
+                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
+                                <ShieldCheck size={32} className="text-green-400" />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3">100% Verified</h3>
+                            <p className="text-gray-400">Every NGO is manually vetted to ensure your money goes to the right place.</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
+                                <Globe size={32} className="text-green-400" />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3">Global Impact</h3>
+                            <p className="text-gray-400">Support causes from across the nation, from local shelters to national relief funds.</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="bg-white/10 p-4 rounded-2xl mb-6">
+                                <Heart size={32} className="text-green-400" />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3">Transparent</h3>
+                            <p className="text-gray-400">Get regular updates and see exactly how your donation is making a difference.</p>
+                        </div>
                     </div>
                 </div>
             </section>
